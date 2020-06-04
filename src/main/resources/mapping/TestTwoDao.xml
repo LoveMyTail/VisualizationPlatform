@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.TestTwoDao">
+
+    <select id="findTaxBidByCompany" resultType="com.example.demo.entity.TestTwo">
+        SELECT id,datetime,belongs,tax_bid FROM testtwo order by datetime , belongs;
+    </select>
+
+    <select id="findTaxBidByPlant" resultType="com.example.demo.entity.TestTwo">
+        SELECT id,datetime,power_plant,tax_bid FROM testtwo order by datetime , power_plant;
+    </select>
+
+
+</mapper>

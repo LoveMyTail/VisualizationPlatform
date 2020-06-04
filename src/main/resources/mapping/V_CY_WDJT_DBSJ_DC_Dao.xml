@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.V_CY_WDJT_DBSJ_DC_Dao">
+
+    <select id="findDY_RCBMDJ_HSByDC" resultType="com.example.demo.entity.V_CY_WDJT_DBSJ_DC">
+        SELECT YF,SS_DC,DY_LML,DY_RCRZ,DY_RCBMDJ_HS FROM V_CY_WDJT_DBSJ_DC order by YF,SS_DC
+    </select>
+
+</mapper>

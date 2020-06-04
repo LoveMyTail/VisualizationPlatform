@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MonthlyDao">
+    <select id="findAllYearByMonth" resultType="com.example.demo.entity.V_SJGT_HEAD_YDKCQX" parameterType="String">
+        select * from V_SJGT_HEAD_YDKCQX where YF like '${month}%' order by YF
+    </select>
+
+    <select id="getMonthlyCompletion" parameterType="java.util.Map" statementType="CALLABLE">
+        {call HEAD_YJK_YBSJ (#{c_info, mode=IN,  jdbcType=VARCHAR},
+                                #{result, mode=OUT,jdbcType=VARCHAR}
+    )}
+    </select>
+
+    <select id="getLFStructure" parameterType="java.util.Map" statementType="CALLABLE">
+        {
+            call HEAD_YJK_LF (#{c_info,mode = IN ,jdbcType=VARCHAR},
+                                    #{result,mode=OUT,jdbcType=VARCHAR}
+        )}
+    </select>
+
+    <select id="getRMGHCYBTotalMonth" resultType="com.example.demo.entity.V_SJGT_RMGHCYB_MXB">
+        select * from V_SJGT_RMGHCYB_MXB WHERE to_char(YF,'yyyy-mm-dd') like '${month}%' ORDER BY SID
+    </select>
+
+    <select id="getRMGHCYBTotalYear" resultType="com.example.demo.entity.V_SJGT_RMGHCYB_MXB">
+        select * from V_SJGT_RMGHCYB_MXB WHERE to_char(YF,'yyyy-mm-dd') like '${year}%' ORDER BY SID
+    </select>
+
+    <select id="getDataByMonth" resultType="com.example.demo.entity.V_SJGT_HEAD_RMJGYBB_MXB" parameterType="String">
+        select * from V_SJGT_HEAD_RMJGYBB_MXB WHERE YF = #{month} order by SID
+    </select>
+
+
+</mapper>

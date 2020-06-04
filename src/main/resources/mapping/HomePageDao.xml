@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.HomePageDao">
+    <!--parameterType="com.example.demo.entity.GET_DC_INFO"-->
+    <select id="getDCInfo"  statementType="CALLABLE" parameterType="java.util.Map">
+        {call GET_DC_INFO (#{c_info, mode=IN,  jdbcType=VARCHAR},
+                                #{result, jdbcType=VARCHAR, mode=OUT}
+    )}
+    </select>
+
+    <!--select * from V_CYGS_RBXX where YWRQ = (select max(YWRQ) from V_CYGS_RBXX)-->
+    <select id="getRBInfo" resultType="com.example.demo.entity.V_CYGS_RBXX">
+        select * from (select * from V_CYGS_RBXX order by YWRQ desc ) where rownum <![CDATA[ <=  ]]> 31
+    </select>
+
+    <select id="getHeadZHBTInfo" parameterType="java.util.Map" statementType="CALLABLE">
+        {call HEAD_ZHBT_INFO (#{c_info, mode=IN,  jdbcType=VARCHAR},
+                                #{result, mode=OUT,jdbcType=VARCHAR}
+    )}
+    </select>
+
+    <select id="getDRSJ" resultType="com.example.demo.entity.V_HEAD_DRSJ">
+        select * from V_HEAD_DRSJ where YWRQ = (select max(YWRQ) from V_HEAD_DRSJ)
+    </select>
+
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.RegionalDao">
+    <select id="findDataByDC" resultType="com.example.demo.entity.V_CY_WDJT_DBSJ_DC" parameterType="String">
+        select * from V_CY_WDJT_DBSJ_DC where to_char(YF,'yyyy-mm') = #{month} ORDER BY DY_RCBMDJ_HS,SS_DC
+    </select>
+
+    <select id="findDataByQY" resultType="com.example.demo.entity.V_CY_WDJT_DBSJ_QY" parameterType="String">
+        select * from V_CY_WDJT_DBSJ_QY where to_char(YF,'yyyy-mm') between #{early} AND #{now} order by SS_JT,YF
+    </select>
+
+
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.AnalyseDao">
+
+    <!--入炉入厂标单对比数据-->
+    <select id="getRLRCBDByMonth" resultType="com.example.demo.entity.V_SJGT_HEAD_YDWCQK" parameterType="String">
+        select * from ${table} where YF between #{early} AND #{now} order by YF
+    </select>
+
+    <!--库存量质价-->
+    <select id="getKCLZJByMonth" resultType="com.example.demo.entity.V_SJGT_SJFX_KCLZJ" parameterType="java.lang.String">
+        select * from V_SJGT_SJFX_KCLZJ where FCMC = #{area} and YF between #{early} AND #{now} order by YF
+    </select>
+
+    <!--厂内费用-->
+    <select id="getCNFYData" resultType="com.example.demo.entity.V_SJGT_RMJGYBB_CNFY" parameterType="java.lang.String">
+        select * from V_SJGT_RMJGYBB_CNFY where FCMC = #{area} and to_char(YF,'yyyy-mm') between #{early} and #{now} order by YF,SID
+    </select>
+
+    <!--当期厂内费用构成-->
+    <select id="getCNFYDataForTable" resultType="com.example.demo.entity.V_SJGT_RMJGYBB_CNFY" parameterType="java.lang.String">
+        select * from V_SJGT_RMJGYBB_CNFY where FCMC = #{areaName} and to_char(YF,'yyyy-mm') = #{month} order by YF,SID
+    </select>
+
+    <!--获取累计库存-->
+    <select id="getLJKC" parameterType="java.util.Map" statementType="CALLABLE">
+        {call HEAD_SJFX_KC (#{c_info, mode=IN,  jdbcType=VARCHAR},
+                                #{result, mode=OUT,jdbcType=VARCHAR}
+    )}
+    </select>
+    <!--入炉综合标单构成情况-->
+    <select id="getRLBD" parameterType="java.util.Map" statementType="CALLABLE">
+        {call HEAD_SJFX_RLBD (#{c_info, mode=IN,  jdbcType=VARCHAR},
+                                #{result, mode=OUT,jdbcType=VARCHAR}
+    )}
+    </select>
+
+
+</mapper>

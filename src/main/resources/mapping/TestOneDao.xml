@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.TestOneDao">
+<!--    <resultMap id="" type="com.example.demo.entity.TestOne">-->
+<!--        <result column="id" jdbcType="INTEGER" property="id"></result>-->
+<!--        <result column="name" jdbcType="VARCHAR" property="name"></result>-->
+<!--        <result column="money" jdbcType="FLOAT" property="money"></result>-->
+<!--    </resultMap>-->
+
+    <select id="findAll" resultType="com.example.demo.entity.TestOne">
+        SELECT * FROM testone order by datetime ;
+    </select>
+</mapper>
